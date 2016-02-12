@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(TAG, response.body().string());
                     if (response.isSuccessful()) {
 
+                    }else{
+                        alertUserAboutError();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -53,5 +55,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void alertUserAboutError() {
+        AlertDialogFragment dialog = new AlertDialogFragment();
+        dialog.show(getFragmentManager(),"Error_dialog");
     }
 }
