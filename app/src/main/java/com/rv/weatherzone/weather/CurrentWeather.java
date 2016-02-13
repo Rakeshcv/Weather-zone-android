@@ -1,4 +1,6 @@
-package com.rv.weatherzone;
+package com.rv.weatherzone.weather;
+
+import com.rv.weatherzone.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
