@@ -15,8 +15,11 @@ import android.widget.Toast;
 
 import com.rv.weatherzone.R;
 import com.rv.weatherzone.weather.CurrentWeather;
+import com.rv.weatherzone.weather.DailyForecast;
 import com.rv.weatherzone.weather.Forecast;
+import com.rv.weatherzone.weather.HourlyForecast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         double latitude = -37.8132;
         double longitude = 144.963;
 
-        String forecastUrl = "https://api.forecast.io/forecast/" + apiKey + "/" + latitude + "," + longitude +"?units=si";
+        String forecastUrl = "https://api.forecast.io/forecast/" + apiKey + "/" + latitude + "," + longitude + "?units=si";
 
         if (isNetworkAvailable()) {
 
@@ -168,7 +171,62 @@ public class MainActivity extends AppCompatActivity {
 
         forecast.setCurrentWeather(getCurrentWeatherDetails(jsonData));
 
+        forecast.setHourlyForecast(getHourlyForecast(jsonData));
+
+        forecast.setDailyForecast(getDailyForecast(jsonData));
+
         return forecast;
+    }
+
+    private DailyForecast[] getDailyForecast(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        String timezone = forecast.getString("timezone");
+
+        JSONObject daily = forecast.getJSONObject("daily");
+        JSONArray data = daily.getJSONArray("data");
+
+        DailyForecast[] days = new DailyForecast[data.length()];
+
+        for (int i = 0; i < data.length(); i++) {
+            JSONObject jsonDay = data.getJSONObject(i);
+
+            DailyForecast day = new DailyForecast();
+
+            day.setSummary(jsonDay.getString("summary"));
+            day.setTemperatureMax(jsonDay.getDouble("temperatureMax"));
+            day.setIcon(jsonDay.getString("icon"));
+            day.setTime(jsonDay.getLong("time"));
+            day.setTimezone(timezone);
+
+            days[i] = day;
+        }
+
+        return  days;
+    }
+
+    private HourlyForecast[] getHourlyForecast(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        String timezone = forecast.getString("timezone");
+
+        JSONObject hourly = forecast.getJSONObject("hourly");
+        JSONArray data = hourly.getJSONArray("data");
+
+        HourlyForecast[] hours = new HourlyForecast[data.length()];
+
+        for (int i = 0; i < data.length(); i++) {
+            JSONObject jsonHour = data.getJSONObject(i);
+
+            HourlyForecast hour = new HourlyForecast();
+            hour.setSummary(jsonHour.getString("summary"));
+            hour.setTemperature(jsonHour.getDouble("temperature"));
+            hour.setIcon(jsonHour.getString("icon"));
+            hour.setTime(jsonHour.getLong("time"));
+            hour.setTimezone(timezone);
+
+            hours[i] = hour;
+        }
+
+        return hours;
     }
 
     private CurrentWeather getCurrentWeatherDetails(String jsonData) throws JSONException {
