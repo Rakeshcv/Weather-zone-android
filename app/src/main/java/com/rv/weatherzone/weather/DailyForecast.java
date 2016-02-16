@@ -94,10 +94,12 @@ public class DailyForecast implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(mTime);
         dest.writeString(mSummary);
+        dest.writeDouble(mTemperatureMax);
         dest.writeString(mIcon);
         dest.writeString(mTimezone);
-        dest.writeDouble(mTemperatureMax);
-        dest.writeLong(mTime);
     }
+
+
 }
