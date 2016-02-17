@@ -15,25 +15,7 @@ public class DailyForecast implements Parcelable {
     private String mTimezone;
 
 
-    protected DailyForecast(Parcel in) {
-        mTime = in.readLong();
-        mSummary = in.readString();
-        mTemperatureMax = in.readDouble();
-        mIcon = in.readString();
-        mTimezone = in.readString();
-    }
 
-    public static final Creator<DailyForecast> CREATOR = new Creator<DailyForecast>() {
-        @Override
-        public DailyForecast createFromParcel(Parcel in) {
-            return new DailyForecast(in);
-        }
-
-        @Override
-        public DailyForecast[] newArray(int size) {
-            return new DailyForecast[size];
-        }
-    };
 
     public long getTime() {
         return mTime;
@@ -101,5 +83,26 @@ public class DailyForecast implements Parcelable {
         dest.writeString(mTimezone);
     }
 
+    private DailyForecast(Parcel in) {
+        mTime = in.readLong();
+        mSummary = in.readString();
+        mTemperatureMax = in.readDouble();
+        mIcon = in.readString();
+        mTimezone = in.readString();
+    }
 
+    public static final Creator<DailyForecast> CREATOR = new Creator<DailyForecast>() {
+        @Override
+        public DailyForecast createFromParcel(Parcel in) {
+            return new DailyForecast(in);
+        }
+
+        @Override
+        public DailyForecast[] newArray(int size) {
+            return new DailyForecast[size];
+        }
+    };
+
+    public DailyForecast() {
+    }
 }

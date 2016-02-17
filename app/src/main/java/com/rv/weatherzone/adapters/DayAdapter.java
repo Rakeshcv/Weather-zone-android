@@ -48,17 +48,22 @@ public class DayAdapter extends BaseAdapter {
             holder.dayLabel = (TextView) convertView.findViewById(R.id.dayNameLabel);
 
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         DailyForecast day = mDays[position];
 
         holder.iconImageView.setImageResource(day.getIconId());
-        holder.temperatureLabel.setText(day.getTemperatureMax()+"");
-        holder.dayLabel.setText(day.getDayOfTheWeek());
+        holder.temperatureLabel.setText(day.getTemperatureMax() + "");
 
-        return null;
+        if (position == 0) {
+            holder.dayLabel.setText("Today");
+        } else {
+            holder.dayLabel.setText(day.getDayOfTheWeek());
+        }
+
+        return convertView;
     }
 
     private static class ViewHolder {

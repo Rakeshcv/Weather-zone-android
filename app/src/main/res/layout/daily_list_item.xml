@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:id="@id/android:list"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -25,8 +26,8 @@
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/circleImageView"
         android:layout_toRightOf="@+id/circleImageView"
-        android:src="@drawable/clear_day"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:src="@drawable/clear_day"/>
 
     <TextView
         android:id="@+id/dayNameLabel"
@@ -35,10 +36,10 @@
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/iconImageView"
         android:layout_toRightOf="@+id/iconImageView"
+        android:paddingLeft="10dp"
         android:textColor="#ffffffff"
         android:textSize="20sp"
-        tools:text="Wednesday"
-        android:paddingLeft="10dp"/>
+        tools:text="Wednesday"/>
 
     <TextView
         android:id="@+id/temperatureLabel"
