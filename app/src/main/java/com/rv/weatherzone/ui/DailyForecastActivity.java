@@ -47,6 +47,6 @@ public class DailyForecastActivity extends ListActivity {
         String highTemp = mDays[position].getTemperatureMax()+"";
         String message = String.format("On %s the high will be %s and it will be %s",dayOfTheWeek,highTemp,conditions);
 
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();p
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 }
